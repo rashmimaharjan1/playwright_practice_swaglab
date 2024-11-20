@@ -6,3 +6,4 @@ node_modules/
 /tests/example.spec.js
 /tests/tests-examples/
 /tests-examples/
+/tests/inventoryPage.spec.js
