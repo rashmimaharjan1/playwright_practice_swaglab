@@ -52,7 +52,7 @@ test.describe('Inventory Filters', ()=>{
      await expect(cardCount).toBe(6); //check card count to be 6
     })
 
-    test.only('inventory card items should be clickable',async({page})=>{
+    test('inventory card items should be clickable',async({page})=>{
         //clicks first card item and checks if it goes to its detail page
         await page.locator('[data-test="item-4-title-link"]').click();
         await expect(page).toHaveURL('/inventory-item.html?id=4');
