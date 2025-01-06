@@ -1,22 +1,20 @@
 // @ts-check
-
-const {test, expect} = require('@playwright/test');
-test.beforeEach(async({page})=>{
-    await page.goto('/');
-    await page.locator('[data-test="username"]').click();
-    await page.locator('[data-test="username"]').fill('standard_user');
-    await page.locator('[data-test="username"]').press('Tab');
-    await page.locator('[data-test="password"]').fill('secret_sauce');
-    await page.locator('[data-test="login-button"]').click();
-});
+const test = require ('./fixture');
+const { expect} = require('@playwright/test');
 
 test.describe('checkout', ()=>{
-    test.beforeEach(async({page})=>{
+    test.beforeEach(async({loggedInPage,inventoryPage})=>{
+        //ensure user is logged in
+        await expect(loggedInPage).toHaveURL('/inventory.html');
+        
+        await inventoryPage.addItemToCart(0);
+        await inventoryPage.addItemToCart(1);
+
         //first page of checkout  
-        await page.locator('[data-test="shopping-cart-link"]').click();
+        await inventoryPage.page.locator('[data-test="shopping-cart-link"]').click();
         
         //check if user lands on cart page or not after clicking on checkout icon button.
-        await expect(page).toHaveURL('/cart.html');
+        await expect(inventoryPage.page).toHaveURL('/cart.html');
     })
     test('user can checkout successfully', async({page}) =>{   
         await page.locator('[data-test="checkout"]').click();

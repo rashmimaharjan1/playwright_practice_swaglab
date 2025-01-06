@@ -3,6 +3,7 @@
 const test = require('./fixture');
 const { expect } = require('@playwright/test');
 
+
  test('Add to cart button should be clickable', async({loggedInPage})=>{
         await loggedInPage.getByText('Add to cart').nth(0).click();
 

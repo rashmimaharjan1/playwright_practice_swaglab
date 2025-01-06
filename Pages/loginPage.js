@@ -35,4 +35,8 @@ exports.LoginPage = class LoginPage{
     async getErrorMessage(){
         await this.errorMessage.textContent();
     }
+
+    async assertLoginSuccess(){
+        await expect(this.page).toHaveURL('/inventory.html');
+    }
 }
